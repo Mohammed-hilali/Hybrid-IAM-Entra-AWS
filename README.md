@@ -82,6 +82,8 @@ This project leverages **SAML** and **SCIM** to centralize authentication and au
 
 -
 
+## Step 1 — Change AWS IAM Identity Center to External IdP (Entra ID)
+
 First, navigate to **AWS IAM Identity Center** and change the default Identity Provider (IdP) to **Microsoft Entra ID**.  
 To configure SAML, you can use the metadata file provided by AWS IAM Identity Center and upload it to Entra ID.  
 This simplifies the configuration process and ensures a secure, seamless connection between Entra ID and AWS for Single Sign-On (SSO).
@@ -125,6 +127,8 @@ Once these steps are completed, the Identity Provider (IdP) has been successfull
 
 -
 
+## Step 2 — Configure Automated Provisioning (SCIM)
+
 Next, we move on to **automated provisioning configuration**.  
 This involves setting up **SCIM-based synchronization** between Microsoft Entra ID and AWS IAM Identity Center, allowing users and groups to be automatically provisioned, updated, or deprovisioned in AWS based on their Entra ID attributes and group memberships.
 
@@ -155,6 +159,41 @@ These credentials allow Entra ID to securely push users and groups from the Azur
 Now, the user can access AWS resources from **MyApps** and authenticate using **Microsoft Entra ID** as the central Identity Provider (IdP).
 
 <img width="2259" height="556" alt="image" src="https://github.com/user-attachments/assets/03c0bf57-bdb3-46a0-9f68-63c0341774cf" />
+
+-
+
+## Step 3 — Create Permission Sets in AWS Identity Center
+
+In IAM Identity Center, we can create multiple permission sets. For this project, I chose to create an inline policy named "Entra-AWS-Connect" and use the managed policy ReadOnlyAccess. These permissions will be assigned to the ENTRA-AWS-USER-DADES group, which is synchronized from Entra ID into the DADES-DEV account.
+
+-
+
+<img width="3195" height="913" alt="image" src="https://github.com/user-attachments/assets/84646a1c-3604-424f-8d9e-535bff41d906" />
+
+-
+
+- Create Permission Set `entra-aws-connect` with inline JSON:  
+
+   ```json
+   {
+     "Version": "2012-10-17",
+     "Statement": [
+       {
+         "Sid": "Statement1",
+         "Effect": "Allow",
+         "Action": [
+           "ec2-instance-connect:*"
+         ],
+         "Resource": [
+                "*"
+         ]
+       }
+     ]
+   }
+
+
+<img width="2813" height="764" alt="image" src="https://github.com/user-attachments/assets/3b4bffbf-e185-4d6e-a326-9beb2c5c83ab" />
+
 
 
 
