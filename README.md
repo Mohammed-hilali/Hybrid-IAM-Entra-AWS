@@ -143,7 +143,7 @@ These credentials allow Entra ID to securely push users and groups from the Azur
 
 
 
-### 3. Verify Provisioning
+### Verify Provisioning
 - After configuration, the test user (`admin@mohammedhilali.com`) created in Entra ID should appear in AWS IAM Identity Center.
   
 <img width="2248" height="927" alt="image" src="https://github.com/user-attachments/assets/28d1cee9-df51-447e-9796-856563680501" />
@@ -193,6 +193,33 @@ In IAM Identity Center, we can create multiple permission sets. For this project
 
 
 <img width="2813" height="764" alt="image" src="https://github.com/user-attachments/assets/3b4bffbf-e185-4d6e-a326-9beb2c5c83ab" />
+
+-
+## Step 4 — Control AWS permissions from Entra ID.
+
+Now I will add the admin user to our group in Azure. This relationship (user in a group) will also be synchronized to AWS IAM Identity Center, and any roles or permissions associated with this group in AWS will also be inherited by the user through the group.
+
+-
+
+In Entra ID :
+
+<img width="3180" height="872" alt="image" src="https://github.com/user-attachments/assets/3ee9b6f1-f8a0-4de3-82b3-94f18e9374d1" />
+
+-
+
+In AWS Identity Center :
+
+<img width="2277" height="754" alt="image" src="https://github.com/user-attachments/assets/85304920-6e43-4254-a7fb-20b9a3de4714" />
+
+-
+
+When we use My Apps to sign in to the AWS console with the admin account, we can see that the user inherits the group permissions.
+
+-
+
+<img width="2288" height="839" alt="image" src="https://github.com/user-attachments/assets/f6048f5d-5d9d-4622-b385-34e2b623b9d7" />
+
+
 
 
 
